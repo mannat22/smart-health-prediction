@@ -55,16 +55,27 @@ if page == "Health Prediction":
     bmi = weight / (height ** 2) if height > 0 else 0
 
     if st.button("Predict Health Risk"):
+input_data = pd.DataFrame([{
+    "age": age,
+    "weight": weight,
+    "height": height,
+    "exercise": exercise,
+    "sleep": sleep,
+    "sugar_intake": sugar,
+    "smoking": 1 if smoking == "yes" else 0,
+    "alcohol": 1 if alcohol == "yes" else 0,
+    "married": 1 if married == "yes" else 0,
+    "bmi": bmi
+}])
+       expected_columns = [
+    "age","weight","height","exercise","sleep",
+    "sugar_intake","smoking","alcohol","married","bmi"
+]
 
-        input_data = pd.DataFrame([[age, weight, height, exercise, sleep, sugar,
-        1 if smoking=="yes" else 0,
-        1 if alcohol=="yes" else 0,
-        1 if married=="yes" else 0,
-        bmi]],
-        columns=["age","weight","height","exercise","sleep","sugar_intake",
-        "smoking","alcohol","married","bmi"])
-
-        input_scaled = scaler.transform(input_data)
+input_data = input_data[expected_columns]
+input_scaled = scaler.transform(input_data)
+st.write("Input Data Sent to Model:")
+st.dataframe(input_data)
 
         prob = model.predict_proba(input_scaled)
         prediction = model.predict(input_scaled)[0]
