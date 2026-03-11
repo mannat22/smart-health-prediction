@@ -54,8 +54,8 @@ if page == "Health Prediction":
 
     bmi = weight / (height ** 2) if height > 0 else 0
 
-    if st.button("Predict Health Risk"):
-input_data = pd.DataFrame([{
+if st.button("Predict Health Risk"):
+  input_data = pd.DataFrame([{
     "age": age,
     "weight": weight,
     "height": height,
