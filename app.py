@@ -54,6 +54,15 @@ if page == "Health Prediction":
 
     bmi = weight / (height ** 2) if height > 0 else 0
 if st.button("Predict Health Risk"):
+    cursor.execute(
+       """
+       INSERT INTO predictions(age,bmi,sleep,exercise,prediction,risk_score,uncertainty)
+       VALUES (?, ?, ?, ?, ?, ?, ?)
+       """,
+       (age, bmi, sleep, exercise, prediction, risk_score, uncertainty)
+) 
+ 
+conn.commit()
 
     # Create dataframe from user inputs
     input_data = pd.DataFrame([{
