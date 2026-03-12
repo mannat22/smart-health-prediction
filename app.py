@@ -97,9 +97,9 @@ st.write("Risk Score:", risk_score)
 st.write("Confidence:", round(confidence,2))
 st.write("Uncertainty:", round(uncertainty,2))
 
-        cursor.execute("""
-        INSERT INTO predictions(age,bmi,sleep,exercise,prediction,risk_score,uncertainty)
-        VALUES(?,?,?,?,?,?,?)
-        """,(age,bmi,sleep,exercise,int(prediction),risk_score,uncertainty))
+cursor.execute("""
+INSERT INTO predictions(age,bmi,sleep,exercise,prediction,risk_score,uncertainty)
+VALUES(?,?,?,?,?,?,?)
+""",(age,bmi,sleep,exercise,int(prediction),risk_score,uncertainty))
 
-        conn.commit()
+conn.commit()
