@@ -62,17 +62,19 @@ if st.button("Predict Health Risk"):
     "exercise": exercise,
     "sleep": sleep,
     "sugar_intake": sugar,
-    "smoking": 1 if smoking == "yes" else 0,
-    "alcohol": 1 if alcohol == "yes" else 0,
-    "married": 1 if married == "yes" else 0,
+    "smoking": 1 if smoking=="yes" else 0,
+    "alcohol": 1 if alcohol=="yes" else 0,
+    "married": 1 if married=="yes" else 0,
     "bmi": bmi
 }])
+
 expected_columns = [
     "age","weight","height","exercise","sleep",
     "sugar_intake","smoking","alcohol","married","bmi"
 ]
 
 input_data = input_data[expected_columns]
+
 input_scaled = scaler.transform(input_data.values)
 st.write("Input Data Sent to Model:")
 st.dataframe(input_data)
