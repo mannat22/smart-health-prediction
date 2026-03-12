@@ -73,7 +73,7 @@ expected_columns = [
 ]
 
 input_data = input_data[expected_columns]
-input_scaled = scaler.transform(input_data)
+input_scaled = scaler.transform(input_data.values)
 st.write("Input Data Sent to Model:")
 st.dataframe(input_data)
 
