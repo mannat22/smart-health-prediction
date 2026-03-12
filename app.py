@@ -105,6 +105,26 @@ if st.button("Predict Health Risk"):
     st.write("Confidence:", round(confidence, 2))
     st.write("Uncertainty:", round(uncertainty, 2))
 
+import sqlite3
+
+# connect to database
+conn = sqlite3.connect("health_predictions.db")
+cursor = conn.cursor()
+
+# create table if it doesn't exist
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS predictions(
+    age INTEGER,
+    bmi REAL,
+    sleep REAL,
+    exercise REAL,
+    prediction INTEGER,
+    risk_score INTEGER,
+    uncertainty REAL
+)
+""")
+
+# insert prediction
 cursor.execute(
 """
 INSERT INTO predictions(age,bmi,sleep,exercise,prediction,risk_score,uncertainty)
