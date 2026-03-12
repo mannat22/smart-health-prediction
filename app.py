@@ -77,14 +77,14 @@ input_scaled = scaler.transform(input_data)
 st.write("Input Data Sent to Model:")
 st.dataframe(input_data)
 
-        prob = model.predict_proba(input_scaled)
-        prediction = model.predict(input_scaled)[0]
+prob = model.predict_proba(input_scaled)
+prediction = model.predict(input_scaled)[0]
 
-        confidence = np.max(prob)
-        uncertainty = 1 - confidence
-        risk_score = int(confidence * 100)
+confidence = np.max(prob)
+uncertainty = 1 - confidence
+risk_score = int(confidence * 100)
 
-        st.subheader("Prediction Result")
+st.subheader("Prediction Result")
 
         if prediction == 0:
             st.success("Low Health Risk")
