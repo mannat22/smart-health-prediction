@@ -123,7 +123,7 @@ cursor.execute(
        INSERT INTO predictions(age,bmi,sleep,exercise,prediction,risk_score,uncertainty)
        VALUES (?, ?, ?, ?, ?, ?, ?)
        """,
-       (age, bmi, sleep, exercise, int(prediction), risk_score, uncertainty)
+       (age, bmi, sleep, exercise, prediction, risk_score, uncertainty)
 ) 
  
 conn.commit()
