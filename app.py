@@ -123,14 +123,14 @@ CREATE TABLE IF NOT EXISTS predictions(
     uncertainty REAL
 )
 """)
-
+if st.button("predict Health Risk");
 # insert prediction
-cursor.execute(
-"""
-INSERT INTO predictions(age,bmi,sleep,exercise,prediction,risk_score,uncertainty)
-VALUES (?, ?, ?, ?, ?, ?, ?)
-""",
-(age, bmi, sleep, exercise, int(prediction), risk_score, uncertainty)
-)
-
-conn.commit()
+    cursor.execute(
+       """
+       INSERT INTO predictions(age,bmi,sleep,exercise,prediction,risk_score,uncertainty)
+       VALUES (?, ?, ?, ?, ?, ?, ?)
+       """,
+       (age, bmi, sleep, exercise, int(prediction), risk_score, uncertainty)
+    ) 
+ 
+    conn.commit()
