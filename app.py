@@ -55,49 +55,55 @@ if page == "Health Prediction":
     bmi = weight / (height ** 2) if height > 0 else 0
 
 if st.button("Predict Health Risk"):
-  input_data = pd.DataFrame([{
-    "age": age,
-    "weight": weight,
-    "height": height,
-    "exercise": exercise,
-    "sleep": sleep,
-    "sugar_intake": sugar,
-    "smoking": 1 if smoking=="yes" else 0,
-    "alcohol": 1 if alcohol=="yes" else 0,
-    "married": 1 if married=="yes" else 0,
-    "bmi": bmi
-}])
 
-expected_columns = [
-    "age","weight","height","exercise","sleep",
-    "sugar_intake","smoking","alcohol","married","bmi"
-]
+    # Create dataframe from user inputs
+    input_data = pd.DataFrame([{
+        "age": age,
+        "weight": weight,
+        "height": height,
+        "exercise": exercise,
+        "sleep": sleep,
+        "sugar_intake": sugar,
+        "smoking": 1 if smoking == "yes" else 0,
+        "alcohol": 1 if alcohol == "yes" else 0,
+        "married": 1 if married == "yes" else 0,
+        "bmi": bmi
+    }])
 
-input_data = input_data[expected_columns]
+    # Correct feature order (must match training)
+    expected_columns = [
+        "age", "weight", "height", "exercise", "sleep",
+        "sugar_intake", "smoking", "alcohol", "married", "bmi"
+    ]
 
-input_scaled = scaler.transform(input_data.values)
-st.write("Input Data Sent to Model:")
-st.dataframe(input_data)
+    input_data = input_data[expected_columns]
 
-prob = model.predict_proba(input_scaled)
-prediction = model.predict(input_scaled)[0]
+    # Scale input
+    input_scaled = scaler.transform(input_data.values)
 
-confidence = np.max(prob)
-uncertainty = 1 - confidence
-risk_score = int(confidence * 100)
+    st.write("Input Data Sent to Model:")
+    st.dataframe(input_data)
 
-st.subheader("Prediction Result")
+    # Prediction
+    prob = model.predict_proba(input_scaled)
+    prediction = model.predict(input_scaled)[0]
 
-if prediction == 0:
-            st.success("Low Health Risk")
-elif prediction == 1:
-            st.warning("Medium Health Risk")
-else:
-            st.error("High Health Risk")
+    confidence = np.max(prob)
+    uncertainty = 1 - confidence
+    risk_score = int(confidence * 100)
 
-st.write("Risk Score:", risk_score)
-st.write("Confidence:", round(confidence,2))
-st.write("Uncertainty:", round(uncertainty,2))
+    st.subheader("Prediction Result")
+
+    if prediction == 0:
+        st.success("Low Health Risk")
+    elif prediction == 1:
+        st.warning("Medium Health Risk")
+    else:
+        st.error("High Health Risk")
+
+    st.write("Risk Score:", risk_score)
+    st.write("Confidence:", round(confidence, 2))
+    st.write("Uncertainty:", round(uncertainty, 2))
 
 cursor.execute("""
 INSERT INTO predictions(age,bmi,sleep,exercise,prediction,risk_score,uncertainty)
