@@ -122,7 +122,7 @@ CREATE TABLE IF NOT EXISTS predictions(
     uncertainty REAL
 )
 """)
-if st.button("predict Health Risk"):
+
 # insert prediction
     cursor.execute(
        """
