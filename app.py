@@ -86,16 +86,16 @@ risk_score = int(confidence * 100)
 
 st.subheader("Prediction Result")
 
-        if prediction == 0:
+if prediction == 0:
             st.success("Low Health Risk")
-        elif prediction == 1:
+elif prediction == 1:
             st.warning("Medium Health Risk")
-        else:
+else:
             st.error("High Health Risk")
 
-        st.write("Risk Score:", risk_score)
-        st.write("Confidence:", round(confidence,2))
-        st.write("Uncertainty:", round(uncertainty,2))
+st.write("Risk Score:", risk_score)
+st.write("Confidence:", round(confidence,2))
+st.write("Uncertainty:", round(uncertainty,2))
 
         cursor.execute("""
         INSERT INTO predictions(age,bmi,sleep,exercise,prediction,risk_score,uncertainty)
