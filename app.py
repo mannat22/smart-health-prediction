@@ -58,21 +58,15 @@ if st.button("Predict Health Risk"):
     # Create dataframe from user inputs
     input_data = pd.DataFrame([{
         "age": age,
-        "weight": weight,
-        "height": height,
         "exercise": exercise,
         "sleep": sleep,
-        "sugar_intake": sugar,
-        "smoking": 1 if smoking == "yes" else 0,
-        "alcohol": 1 if alcohol == "yes" else 0,
-        "married": 1 if married == "yes" else 0,
         "bmi": bmi
     }])
 
     # Correct feature order (must match training)
     expected_columns = [
-        "age", "weight", "height", "exercise", "sleep",
-        "sugar_intake", "smoking", "alcohol", "married", "bmi"
+        "age", "exercise", "sleep",
+         "bmi"
     ]
 
     input_data = input_data[expected_columns]
