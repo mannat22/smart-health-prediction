@@ -67,10 +67,10 @@ if st.button("Predict Health Risk"):
     "married": 1 if married == "yes" else 0,
     "bmi": bmi
 }])
-          expected_columns = [
+    expected_columns = [
     "age","weight","height","exercise","sleep",
     "sugar_intake","smoking","alcohol","married","bmi"
-]
+    ]
 
 input_data = input_data[expected_columns]
 input_scaled = scaler.transform(input_data)
