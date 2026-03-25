@@ -64,16 +64,13 @@ if page == "Health Prediction":
       }])
 
     # Correct feature order (must match training)
-    expected_columns = [
-        "age", "exercise", "sleep",
-         "bmi"
-    ]
+    expected_columns = ["age", "exercise", "sleep", "bmi"]
     
     input_data = pd.DataFrame([[age, exercise, sleep, bmi]],
-                          columns=["age", "exercise", "sleep", "bmi"])
+                          columns=expected_columns)
 
     # Scale input
-    input_scaled = scaler.transform(input_data.values)
+    input_scaled = scaler.transform(input_data)
 
     st.write("Input Data Sent to Model:")
     st.dataframe(input_data)
