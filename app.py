@@ -53,7 +53,7 @@ if page == "Health Prediction":
     married = st.selectbox("Married", ["no", "yes"])
 
     bmi = weight / (height ** 2) if height > 0 else 0
-if st.button("Predict Health Risk"):
+    if st.button("Predict Health Risk"):
 
     # Create dataframe from user inputs
     input_data = pd.DataFrame([{
@@ -98,32 +98,15 @@ if st.button("Predict Health Risk"):
     st.write("Confidence:", round(confidence, 2))
     st.write("Uncertainty:", round(uncertainty, 2))
 
-import sqlite3
 
-# connect to database
-conn = sqlite3.connect("health_predictions.db")
-cursor = conn.cursor()
-
-# create table if it doesn't exist
-cursor.execute("""
-CREATE TABLE IF NOT EXISTS predictions(
-    age INTEGER,
-    bmi REAL,
-    sleep REAL,
-    exercise REAL,
-    prediction INTEGER,
-    risk_score INTEGER,
-    uncertainty REAL
-)
-""")
 
 # insert prediction
-cursor.execute(
-       """
-       INSERT INTO predictions(age,bmi,sleep,exercise,prediction,risk_score,uncertainty)
-       VALUES (?, ?, ?, ?, ?, ?, ?)
-       """,
-       (age, bmi, sleep, exercise, prediction, risk_score, uncertainty)
-) 
+         cursor.execute(
+         """
+         INSERT INTO predictions(age,bmi,sleep,exercise,prediction,risk_score,uncertainty)
+         VALUES (?, ?, ?, ?, ?, ?, ?)
+         """,
+        (age, bmi, sleep, exercise, prediction, risk_score, uncertainty)
+        ) 
  
-conn.commit()
+         conn.commit()
