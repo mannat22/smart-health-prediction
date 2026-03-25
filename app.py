@@ -56,12 +56,12 @@ if page == "Health Prediction":
     if st.button("Predict Health Risk"):
 
     # Create dataframe from user inputs
-    input_data = pd.DataFrame([{
+      input_data = pd.DataFrame([{
         "age": age,
         "exercise": exercise,
         "sleep": sleep,
         "bmi": bmi
-    }])
+      }])
 
     # Correct feature order (must match training)
     expected_columns = [
