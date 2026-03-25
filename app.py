@@ -68,8 +68,9 @@ if page == "Health Prediction":
         "age", "exercise", "sleep",
          "bmi"
     ]
-
-    input_data = input_data[expected_columns]
+    
+    input_data = pd.DataFrame([[age, exercise, sleep, bmi]],
+                          columns=["age", "exercise", "sleep", "bmi"])
 
     # Scale input
     input_scaled = scaler.transform(input_data.values)
