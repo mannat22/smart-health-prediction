@@ -109,4 +109,4 @@ if page == "Health Prediction":
         (age, bmi, sleep, exercise, prediction, risk_score, uncertainty)
     ) 
  
-         conn.commit()
+    conn.commit()
